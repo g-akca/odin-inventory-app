@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { getAllCategories } from "../controllers/categoryController.js";
 
 const router = Router();
 
 router.get("/", (req, res) => {
-  console.log("You sent a GET request to the index route.");
+  const categories = getAllCategories(req, res);
 });
 
 router.get("/category/:id", (req, res) => {
