@@ -5,4 +5,9 @@ async function getAllCategories() {
   return rows;
 }
 
-export default { getAllCategories };
+async function getItemsByCategory(categoryId) {
+  const { rows } = await pool.query("SELECT * FROM items WHERE items.category_id = $1", [categoryId]);
+  return rows;
+}
+
+export default { getAllCategories, getItemsByCategory };
