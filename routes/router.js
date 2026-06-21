@@ -6,7 +6,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   const categories = await getAllCategories(req, res);
 
-  console.log(categories);
+  res.render("index", { categories: categories });
 });
 
 router.get("/category/:id", (req, res) => {
