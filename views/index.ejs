@@ -11,11 +11,15 @@
     <div>
       <h2>Categories</h2>
 
-      <ul>
-        <% categories.map(category => { %>
-          <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
-        <% }) %>
-      </ul>
+      <% if (categories.length === 0) { %>
+        <p>No categories were found.</p>
+      <% } else { %>
+        <ul>
+          <% categories.map(category => { %>
+            <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
+          <% }) %>
+        </ul>
+      <% } %>
     </div>
   </body>
 </html>
