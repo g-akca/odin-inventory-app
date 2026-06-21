@@ -3,8 +3,10 @@ import { getAllCategories } from "../controllers/categoryController.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  const categories = getAllCategories(req, res);
+router.get("/", async (req, res) => {
+  const categories = await getAllCategories(req, res);
+
+  console.log(categories);
 });
 
 router.get("/category/:id", (req, res) => {
