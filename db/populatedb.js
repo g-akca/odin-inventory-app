@@ -40,14 +40,22 @@ ON CONFLICT DO NOTHING;
 `;
 
 async function main() {
-  console.log("Seeding inventory database...");
-
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL
-  });
+  const client = new Client(
+    process.env.DATABASE_URL
+      ? { connectionString: process.env.DATABASE_URL }
+      : {
+          host: process.env.DB_HOST || "localhost",
+          port: Number(process.env.DB_PORT) || 5432,
+          user: process.env.DB_USER || "postgres",
+          password: process.env.DB_PASSWORD || "postgres",
+          database: process.env.DB_NAME || "inventory_app",
+        }
+  );
 
   try {
+    console.log("Connecting to database...");
     await client.connect();
+    console.log("Connected. Running seed SQL...");
     await client.query(SQL);
     console.log("Inventory seed completed.");
   } catch (error) {
