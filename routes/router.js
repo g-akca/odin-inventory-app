@@ -16,10 +16,11 @@ router.get("/category/:id", async (req, res) => {
   res.render("category", { category: category, items: items });
 });
 
-router.get("/item/:id", (req, res) => {
+router.get("/item/:id", async (req, res) => {
   const item = await getItemById(req.params.id);
+  const category = await getCategoryById(item.category_id);
 
-  res.render("item", { item: item });
+  res.render("item", { item: item, category: category });
 });
 
 export default router;
