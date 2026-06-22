@@ -10,14 +10,4 @@ async function getCategoryById(categoryId) {
   return category;
 }
 
-async function getItemsByCategory(categoryId) {
-  const items = await db.getItemsByCategory(categoryId);
-  return items;
-}
-
-async function getItemById(itemId) {
-  const item = await db.getItemById(itemId);
-  return item;
-}
-
-export { getAllCategories, getCategoryById, getItemsByCategory, getItemById };
+export { getAllCategories, getCategoryById };
