@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Inventory - New Item</title>
+  </head>
+  <body>
+    <h1>Create New Item</h1>
+
+    <form method="POST" action="/item/new">
+      <div>
+        <label for="name">Item Name</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+
+      <div>
+        <label for="categoryName">Category</label>
+        <input type="text" id="categoryName" value="<%= category.name %>" disabled>
+
+        <input type="hidden" name="categoryId" value="<%= category.id %>">
+      </div>
+
+      <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity">
+      </div>
+
+      <div>
+        <label for="unit">Unit</label>
+        <input type="text" name="unit" id="unit" required>
+      </div>
+
+      <div>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" required>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
