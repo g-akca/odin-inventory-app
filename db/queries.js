@@ -23,11 +23,14 @@ async function getItemById(itemId) {
 
 // INSERT queries
 async function insertCategory(name) {
-  await pool.query("INSERT INTO categories VALUES ($1)", [name]);
+  await pool.query("INSERT INTO categories (name) VALUES ($1)", [name]);
 }
 
 async function insertItem(name, categoryId, quantity, unit, price) {
-  await pool.query("INSERT INTO items VALUES ($1, $2, $3, $4, $5)", [name, categoryId, quantity, unit, price]);
+  await pool.query(
+    "INSERT INTO items (name, category_id, quantity, unit, price) VALUES ($1, $2, $3, $4, $5)",
+    [name, categoryId, quantity, unit, price]
+  );
 }
 
 export default { getAllCategories, getCategoryById, getItemsByCategory, getItemById, insertCategory, insertItem };
