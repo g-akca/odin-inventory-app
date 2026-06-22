@@ -30,7 +30,9 @@ router.get("/category/:id", async (req, res) => {
 
 // Item routes
 router.get("/item/new", async (req, res) => {
-  res.render("itemNewForm");
+  const category = await getCategoryById(req.query.categoryId || 1);
+
+  res.render("itemNewForm", { category: category });
 });
 
 router.post("/item/new", async (req, res) => {
