@@ -10,4 +10,8 @@ async function getItemById(itemId) {
   return item;
 }
 
-export { getItemsByCategory, getItemById };
+async function createItemPost(name, categoryId, quantity, unit, price) {
+  await db.insertItem(name, categoryId, quantity, unit, price);
+}
+
+export { getItemsByCategory, getItemById, createItemPost };

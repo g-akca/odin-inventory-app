@@ -10,4 +10,8 @@ async function getCategoryById(categoryId) {
   return category;
 }
 
-export { getAllCategories, getCategoryById };
+async function createCategoryPost(name) {
+  await db.insertCategory(name);
+}
+
+export { getAllCategories, getCategoryById, createCategoryPost };

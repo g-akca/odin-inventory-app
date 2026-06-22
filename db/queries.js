@@ -30,4 +30,4 @@ async function insertItem(name, categoryId, quantity, unit, price) {
   await pool.query("INSERT INTO items VALUES ($1, $2, $3, $4, $5)", [name, categoryId, quantity, unit, price]);
 }
 
-export default { getAllCategories, getCategoryById, getItemsByCategory, getItemById };
+export default { getAllCategories, getCategoryById, getItemsByCategory, getItemById, insertCategory, insertItem };
