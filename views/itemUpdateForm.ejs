@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Inventory - Update Item</title>
+  </head>
+  <body>
+    <h1>Update Item <%= item.name %></h1>
+
+    <form method="POST" action="/item/update/<%= item.id %>">
+      <div>
+        <label for="name">Item Name</label>
+        <input type="text" name="name" id="name" value="<%= item.name %>" required>
+      </div>
+
+      <div>
+        <label for="categoryName">Category</label>
+        <input type="text" id="categoryName" value="<%= category.name %>" disabled>
+
+        <input type="hidden" name="categoryId" value="<%= category.id %>">
+      </div>
+
+      <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>">
+      </div>
+
+      <div>
+        <label for="unit">Unit</label>
+        <input type="text" name="unit" id="unit" value="<%= item.unit %>" required>
+      </div>
+
+      <div>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" value="<%= item.price %>" step="0.01" required>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
