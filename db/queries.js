@@ -45,6 +45,19 @@ async function updateItem(itemId, name, categoryId, quantity, unit, price) {
   );
 }
 
+// DELETE queries
+async function deleteCategory(categoryId) {
+  await pool.query("DELETE FROM categories WHERE id = $1", [categoryId]);
+}
+
+async function deleteItem(itemId) {
+  await pool.query("DELETE FROM items WHERE id = $1", [itemId]);
+}
+
+async function deleteItemsByCategory(categoryId) {
+  await pool.query("DELETE FROM items WHERE category_id = $1", [categoryId]);
+}
+
 export default { 
   getAllCategories, 
   getCategoryById, 
@@ -53,5 +66,8 @@ export default {
   insertCategory, 
   insertItem, 
   updateCategory, 
-  updateItem 
+  updateItem,
+  deleteCategory,
+  deleteItem,
+  deleteItemsByCategory
 };

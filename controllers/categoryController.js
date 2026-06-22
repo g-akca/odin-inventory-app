@@ -18,4 +18,8 @@ async function updateCategoryPost(categoryId, name) {
   await db.updateCategory(categoryId, name);
 }
 
-export { getAllCategories, getCategoryById, createCategoryPost, updateCategoryPost };
+async function deleteCategoryPost(categoryId) {
+  await db.deleteCategory(categoryId);
+}
+
+export { getAllCategories, getCategoryById, createCategoryPost, updateCategoryPost, deleteCategoryPost };

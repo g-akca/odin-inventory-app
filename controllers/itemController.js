@@ -18,4 +18,12 @@ async function updateItemPost(itemId, name, categoryId, quantity, unit, price) {
   await db.updateItem(itemId, name, categoryId, quantity, unit, price);
 }
 
-export { getItemsByCategory, getItemById, createItemPost, updateItemPost };
+async function deleteItemPost(itemId) {
+  await db.deleteItem(itemId);
+}
+
+async function deleteItemsByCategory(categoryId) {
+  await db.deleteItemsByCategory(categoryId);
+}
+
+export { getItemsByCategory, getItemById, createItemPost, updateItemPost, deleteItemPost, deleteItemsByCategory };
