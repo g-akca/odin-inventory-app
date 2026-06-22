@@ -15,4 +15,9 @@ async function getItemsByCategory(categoryId) {
   return items;
 }
 
-export { getAllCategories, getCategoryById, getItemsByCategory };
+async function getItemById(itemId) {
+  const item = await db.getItemById(itemId);
+  return item;
+}
+
+export { getAllCategories, getCategoryById, getItemsByCategory, getItemById };

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllCategories, getCategoryById, getItemsByCategory } from "../controllers/categoryController.js";
+import { getAllCategories, getCategoryById, getItemById, getItemsByCategory } from "../controllers/categoryController.js";
 
 const router = Router();
 
@@ -17,7 +17,9 @@ router.get("/category/:id", async (req, res) => {
 });
 
 router.get("/item/:id", (req, res) => {
-  console.log(`You sent a GET request to the item route with ID ${req.params.id}.`);
+  const item = await getItemById(req.params.id);
+
+  res.render("item", { item: item });
 });
 
 export default router;
