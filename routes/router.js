@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   res.render("index", { categories: categories });
 });
 
-router.get("/category/:id", (req, res) => {
+router.get("/category/:id", async (req, res) => {
   const category = await getCategoryById(req.params.id);
   const items = await getItemsByCategory(req.params.id);
 

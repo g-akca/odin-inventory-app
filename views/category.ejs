@@ -3,9 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Groceries Inventory - <%= category.name %> Category</title>
   </head>
   <body>
-    
+    <h1><%= category.name %> Category</h1>
+
+    <div>
+      <h2>Items</h2>
+      
+      <% if (items.length === 0) { %>
+        <p>No items were found.</p>
+      <% } else { %>
+        <ul>
+          <% items.map(item => { %>
+            <li><a href="/item/<%= item.id %>"><%= item.name %></a> - Quantity: <%= item.quantity %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
   </body>
 </html>
