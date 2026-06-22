@@ -1,6 +1,6 @@
 import db from "../db/queries.js";
 
-async function getAllCategories(req, res) {
+async function getAllCategories() {
   const categories = await db.getAllCategories();
   return categories;
 }
