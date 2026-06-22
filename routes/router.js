@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createCategoryPost, getAllCategories, getCategoryById } from "../controllers/categoryController.js";
-import { getItemsByCategory, getItemById } from "../controllers/itemController.js";
+import { getAllCategories, getCategoryById, createCategoryPost } from "../controllers/categoryController.js";
+import { getItemsByCategory, getItemById, createItemPost } from "../controllers/itemController.js";
 
 const router = Router();
 
@@ -9,13 +9,6 @@ router.get("/", async (req, res) => {
   const categories = await getAllCategories();
 
   res.render("index", { categories: categories });
-});
-
-router.get("/category/:id", async (req, res) => {
-  const category = await getCategoryById(req.params.id);
-  const items = await getItemsByCategory(req.params.id);
-
-  res.render("category", { category: category, items: items });
 });
 
 router.get("/category/new", async (req, res) => {
@@ -28,14 +21,14 @@ router.post("/category/new", async (req, res) => {
   res.redirect("/");
 });
 
-// Item routes
-router.get("/item/:id", async (req, res) => {
-  const item = await getItemById(req.params.id);
-  const category = await getCategoryById(item.category_id);
+router.get("/category/:id", async (req, res) => {
+  const category = await getCategoryById(req.params.id);
+  const items = await getItemsByCategory(req.params.id);
 
-  res.render("item", { item: item, category: category });
+  res.render("category", { category: category, items: items });
 });
 
+// Item routes
 router.get("/item/new", async (req, res) => {
   res.render("itemNewForm");
 });
@@ -44,6 +37,13 @@ router.post("/item/new", async (req, res) => {
   await createItemPost(req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
 
   res.redirect(`/category/${req.body.categoryId}`);
+});
+
+router.get("/item/:id", async (req, res) => {
+  const item = await getItemById(req.params.id);
+  const category = await getCategoryById(item.category_id);
+
+  res.render("item", { item: item, category: category });
 });
 
 export default router;
