@@ -5,9 +5,14 @@ async function getAllCategories() {
   return rows;
 }
 
+async function getCategoryById(categoryId) {
+  const { row } = await pool.query("SELECT * FROM categories WHERE id = $1", [categoryId]);
+  return row;
+}
+
 async function getItemsByCategory(categoryId) {
-  const { rows } = await pool.query("SELECT * FROM items WHERE items.category_id = $1", [categoryId]);
+  const { rows } = await pool.query("SELECT * FROM items WHERE category_id = $1", [categoryId]);
   return rows;
 }
 
-export default { getAllCategories, getItemsByCategory };
+export default { getAllCategories, getCategoryById, getItemsByCategory };
