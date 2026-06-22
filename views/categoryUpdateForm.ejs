@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Inventory - Update Category</title>
+  </head>
+  <body>
+    <h1>Update Category <%= category.name %></h1>
+
+    <form method="POST" action="/category/update/<%= category.id %>">
+      <label for="name">Category Name</label>
+      <input type="text" name="name" id="name" value="<%= category.name %>" required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
