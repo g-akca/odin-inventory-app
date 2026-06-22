@@ -14,4 +14,8 @@ async function createCategoryPost(name) {
   await db.insertCategory(name);
 }
 
-export { getAllCategories, getCategoryById, createCategoryPost };
+async function updateCategoryPost(categoryId, name) {
+  await db.updateCategory(categoryId, name);
+}
+
+export { getAllCategories, getCategoryById, createCategoryPost, updateCategoryPost };

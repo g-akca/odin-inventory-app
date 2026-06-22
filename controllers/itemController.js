@@ -14,4 +14,8 @@ async function createItemPost(name, categoryId, quantity, unit, price) {
   await db.insertItem(name, categoryId, quantity, unit, price);
 }
 
-export { getItemsByCategory, getItemById, createItemPost };
+async function updateItemPost(itemId, name, categoryId, quantity, unit, price) {
+  await db.updateItem(itemId, name, categoryId, quantity, unit, price);
+}
+
+export { getItemsByCategory, getItemById, createItemPost, updateItemPost };

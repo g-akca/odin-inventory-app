@@ -33,4 +33,25 @@ async function insertItem(name, categoryId, quantity, unit, price) {
   );
 }
 
-export default { getAllCategories, getCategoryById, getItemsByCategory, getItemById, insertCategory, insertItem };
+// UPDATE queries
+async function updateCategory(categoryId, name) {
+  await pool.query("UPDATE categories SET name = $1 WHERE id = $2", [name, categoryId]);
+}
+
+async function updateItem(itemId, name, categoryId, quantity, unit, price) {
+  await pool.query(
+    "UPDATE items SET name = $1, category_id = $2, quantity = $3, unit = $4, price = $5 WHERE id = $6",
+    [name, categoryId, quantity, unit, price, itemId]
+  );
+}
+
+export default { 
+  getAllCategories, 
+  getCategoryById, 
+  getItemsByCategory, 
+  getItemById, 
+  insertCategory, 
+  insertItem, 
+  updateCategory, 
+  updateItem 
+};
