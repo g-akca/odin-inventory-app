@@ -10,15 +10,15 @@ async function getItemById(itemId) {
   return item;
 }
 
-async function createItemPost(name, categoryId, quantity, unit, price) {
+async function createItem(name, categoryId, quantity, unit, price) {
   await db.insertItem(name, categoryId, quantity, unit, price);
 }
 
-async function updateItemPost(itemId, name, categoryId, quantity, unit, price) {
+async function updateItem(itemId, name, categoryId, quantity, unit, price) {
   await db.updateItem(itemId, name, categoryId, quantity, unit, price);
 }
 
-async function deleteItemPost(itemId) {
+async function deleteItem(itemId) {
   await db.deleteItem(itemId);
 }
 
@@ -26,4 +26,4 @@ async function deleteItemsByCategory(categoryId) {
   await db.deleteItemsByCategory(categoryId);
 }
 
-export { getItemsByCategory, getItemById, createItemPost, updateItemPost, deleteItemPost, deleteItemsByCategory };
+export { getItemsByCategory, getItemById, createItem, updateItem, deleteItem, deleteItemsByCategory };

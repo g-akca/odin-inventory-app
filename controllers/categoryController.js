@@ -10,16 +10,16 @@ async function getCategoryById(categoryId) {
   return category;
 }
 
-async function createCategoryPost(name) {
+async function createCategory(name) {
   await db.insertCategory(name);
 }
 
-async function updateCategoryPost(categoryId, name) {
+async function updateCategory(categoryId, name) {
   await db.updateCategory(categoryId, name);
 }
 
-async function deleteCategoryPost(categoryId) {
+async function deleteCategory(categoryId) {
   await db.deleteCategory(categoryId);
 }
 
-export { getAllCategories, getCategoryById, createCategoryPost, updateCategoryPost, deleteCategoryPost };
+export { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory };

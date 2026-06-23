@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getAllCategories, getCategoryById, createCategoryPost, updateCategoryPost, deleteCategoryPost } from "../controllers/categoryController.js";
-import { getItemsByCategory, getItemById, createItemPost, updateItemPost, deleteItemPost, deleteItemsByCategory } from "../controllers/itemController.js";
+import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from "../controllers/categoryController.js";
+import { getItemsByCategory, getItemById, createItem, updateItem, deleteItem, deleteItemsByCategory } from "../controllers/itemController.js";
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.get("/category/new", async (req, res) => {
 });
 
 router.post("/category/new", async (req, res) => {
-  await createCategoryPost(req.body.name);
+  await createCategory(req.body.name);
 
   res.redirect("/");
 });
@@ -29,7 +29,7 @@ router.get("/category/update/:id", async (req, res) => {
 });
 
 router.post("/category/update/:id", async (req, res) => {
-  await updateCategoryPost(req.params.id, req.body.name);
+  await updateCategory(req.params.id, req.body.name);
 
   res.redirect(`/category/${req.params.id}`);
 });
@@ -37,7 +37,7 @@ router.post("/category/update/:id", async (req, res) => {
 
 router.post("/category/delete/:id", async (req, res) => {
   await deleteItemsByCategory(req.params.id);
-  await deleteCategoryPost(req.params.id);
+  await deleteCategory(req.params.id);
 
   res.redirect("/");
 });
@@ -58,7 +58,7 @@ router.get("/item/new", async (req, res) => {
 });
 
 router.post("/item/new", async (req, res) => {
-  await createItemPost(req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
+  await createItem(req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
 
   res.redirect(`/category/${req.body.categoryId}`);
 });
@@ -72,7 +72,7 @@ router.get("/item/update/:id", async (req, res) => {
 });
 
 router.post("/item/update/:id", async (req, res) => {
-  await updateItemPost(req.params.id, req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
+  await updateItem(req.params.id, req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
 
   res.redirect(`/item/${req.params.id}`);
 });
@@ -81,7 +81,7 @@ router.post("/item/update/:id", async (req, res) => {
 router.post("/item/delete/:id", async (req, res) => {
   const item = await getItemById(req.params.id);
 
-  await deleteItemPost(req.params.id);
+  await deleteItem(req.params.id);
 
   res.redirect(`/category/${item.category_id}`);
 });
