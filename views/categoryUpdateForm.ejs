@@ -8,7 +8,7 @@
   <body>
     <h1>Update Category <%= category.name %></h1>
 
-    <form method="POST" action="/category/update/<%= category.id %>">
+    <form method="POST" action="/categories/<%= category.id %>">
       <label for="name">Category Name</label>
       <input type="text" name="name" id="name" value="<%= category.name %>" required>
 

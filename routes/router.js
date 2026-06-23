@@ -6,92 +6,78 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const categories = await getAllCategories();
-
-  res.render("index", { categories: categories });
+  res.render("index", { categories });
 });
 
-// Category routes
-router.get("/category/new", async (req, res) => {
+// --- Categories ---
+router.get("/categories", async (req, res) => {
+  const categories = await getAllCategories();
+  res.render("index", { categories });
+});
+
+router.get("/categories/new", (req, res) => {
   res.render("categoryNewForm");
 });
 
-router.post("/category/new", async (req, res) => {
+router.post("/categories", async (req, res) => {
   await createCategory(req.body.name);
-
-  res.redirect("/");
+  res.redirect("/categories");
 });
 
-
-router.get("/category/update/:id", async (req, res) => {
-  const category = await getCategoryById(req.params.id);
-
-  res.render("categoryUpdateForm", { category: category });
-});
-
-router.post("/category/update/:id", async (req, res) => {
-  await updateCategory(req.params.id, req.body.name);
-
-  res.redirect(`/category/${req.params.id}`);
-});
-
-
-router.post("/category/delete/:id", async (req, res) => {
-  await deleteItemsByCategory(req.params.id);
-  await deleteCategory(req.params.id);
-
-  res.redirect("/");
-});
-
-
-router.get("/category/:id", async (req, res) => {
+router.get("/categories/:id", async (req, res) => {
   const category = await getCategoryById(req.params.id);
   const items = await getItemsByCategory(req.params.id);
-
-  res.render("category", { category: category, items: items });
+  res.render("category", { category, items });
 });
 
-// Item routes
-router.get("/item/new", async (req, res) => {
+router.get("/categories/:id/edit", async (req, res) => {
+  const category = await getCategoryById(req.params.id);
+  res.render("categoryUpdateForm", { category });
+});
+
+router.post("/categories/:id", async (req, res) => {
+  await updateCategory(req.params.id, req.body.name);
+  res.redirect(`/categories/${req.params.id}`);
+});
+
+router.post("/categories/:id/delete", async (req, res) => {
+  await deleteItemsByCategory(req.params.id);
+  await deleteCategory(req.params.id);
+  res.redirect("/categories");
+});
+
+// --- Items ---
+router.get("/items/new", async (req, res) => {
   const category = await getCategoryById(req.query.categoryId || 1);
-
-  res.render("itemNewForm", { category: category });
+  res.render("itemNewForm", { category });
 });
 
-router.post("/item/new", async (req, res) => {
+router.post("/items", async (req, res) => {
   await createItem(req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
-
-  res.redirect(`/category/${req.body.categoryId}`);
+  res.redirect(`/categories/${req.body.categoryId}`);
 });
 
-
-router.get("/item/update/:id", async (req, res) => {
+router.get("/items/:id", async (req, res) => {
   const item = await getItemById(req.params.id);
   const category = await getCategoryById(item.category_id);
-
-  res.render("itemUpdateForm", { item: item, category: category });
+  res.render("item", { item, category });
 });
 
-router.post("/item/update/:id", async (req, res) => {
+router.get("/items/:id/edit", async (req, res) => {
+  const item = await getItemById(req.params.id);
+  const category = await getCategoryById(item.category_id);
+  res.render("itemUpdateForm", { item, category });
+});
+
+router.post("/items/:id", async (req, res) => {
   await updateItem(req.params.id, req.body.name, req.body.categoryId, req.body.quantity, req.body.unit, req.body.price);
-
-  res.redirect(`/item/${req.params.id}`);
+  res.redirect(`/items/${req.params.id}`);
 });
 
-
-router.post("/item/delete/:id", async (req, res) => {
+router.post("/items/:id/delete", async (req, res) => {
   const item = await getItemById(req.params.id);
-
   await deleteItem(req.params.id);
-
-  res.redirect(`/category/${item.category_id}`);
-});
-
-
-router.get("/item/:id", async (req, res) => {
-  const item = await getItemById(req.params.id);
-  const category = await getCategoryById(item.category_id);
-
-  res.render("item", { item: item, category: category });
+  res.redirect(`/categories/${item.category_id}`);
 });
 
 export default router;

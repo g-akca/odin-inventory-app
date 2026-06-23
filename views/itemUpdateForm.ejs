@@ -8,7 +8,7 @@
   <body>
     <h1>Update Item <%= item.name %></h1>
 
-    <form method="POST" action="/item/update/<%= item.id %>">
+    <form method="POST" action="/items/<%= item.id %>">
       <div>
         <label for="name">Item Name</label>
         <input type="text" name="name" id="name" value="<%= item.name %>" required>
